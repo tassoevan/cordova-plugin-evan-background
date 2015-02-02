@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+if [[ ! -d .dev ]]
+then
+    cordova create .dev/ me.tassoevan.cordova.test Test --link-to=test/
+fi
+
+cd .dev/
+cordova platform add android
+cordova plugin remove me.tassoevan.cordova.background
+cordova plugin add ../
+cordova build && cordova emulate
