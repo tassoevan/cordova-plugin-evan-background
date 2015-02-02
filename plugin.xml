@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="me.tassoevan.cordova.background"
+    version="0.1.0">
+    <name>Cordova Evan Plugin Background</name>
+    <description>Prevents Cordova apps running in Android devices from going to sleep while in background</description>
+    <license>MIT</license>
+    <keywords>cordova,evan,background,android</keywords>
+
+    <js-module src="www/evan.js" name="evan">
+        <clobbers target="cordova.Evan.Background"/>
+    </js-module>
+    
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BackgroundPlugin">
+                <param name="android-package" value="me.tassoevan.cordova.BackgroundPlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <preference name="KeepRunning" value="true"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="me.tassoevan.cordova.ForegroundService" android:enabled="true"/>
+        </config-file>
+
+        <source-file src="src/android/BackgroundPlugin.java" target-dir="src/me/tassoevan/cordova/"/>
+        <source-file src="src/android/ForegroundService.java" target-dir="src/me/tassoevan/cordova/"/>
+    </platform>
+</plugin>
+
