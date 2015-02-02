@@ -16,9 +16,16 @@ Usage
 -----
 
 ```js
-cordova.Evan.goHome(function() {
-  console.log('success');
-}, function() {
-  console.log('fail');
+// Configure notification on background
+cordova.Evan.Background.configure({
+    title: "My App",
+    ticker: "My App is still running",
+    text: "Doing heavy tasks"
 });
+
+// Enable background mode
+cordova.Evan.Background.enable();
+
+// Disable background mode
+cordova.Evan.Background.disable();
 ```
